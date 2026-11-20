@@ -8,12 +8,13 @@ O site é sobre **um interesse seu**: um hobby, um jogo, o seu time, uma banda o
 https://<seu-usuario>.github.io
 ```
 
-O site inteiro está num arquivo só, o **`index.html`**. Lá dentro tem duas partes:
+O site inteiro está num arquivo só, o **`index.html`**. Lá dentro tem três partes:
 
 | Parte | O que é | Comparando com… |
 |---|---|---|
 | **HTML** | Os títulos, os textos e as listas | O **esqueleto** do site |
 | **CSS** | As cores, as letras e os tamanhos | A **roupa** do site |
+| **JavaScript** (o 🤖 robô, no fim) | Atualiza o site sozinho quando você muda alguma coisa, sem precisar de F5 | Os **músculos** do site (não precisa mexer) |
 
 Cada pedaço do arquivo tem um comentário com ✏️ **TROQUE** explicando o que dá para mudar ali.
 

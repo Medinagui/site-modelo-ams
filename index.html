@@ -4,13 +4,17 @@
   🌐 O MEU SITE — modelo da aula do AMS
   =====================================================================
 
-  Este arquivo é o seu site inteiro. Ele tem duas partes:
+  Este arquivo é o seu site inteiro. Ele tem três partes:
 
     1. O CSS (dentro de <style>): é a ROUPA do site.
        Cores, letras, tamanhos, cantos arredondados.
 
     2. O HTML (dentro de <body>): é o ESQUELETO do site.
        Os títulos, os textos e as listas.
+
+    3. O ROBÔ (dentro de <script>, lá no fim): faz o site se
+       atualizar sozinho quando você muda alguma coisa, sem F5.
+       Não precisa mexer nele.
 
   Este texto aqui é um COMENTÁRIO: um bilhete para você, que o
   navegador não mostra na página. No HTML, o comentário começa com
@@ -236,5 +240,43 @@
     <p class="rodape">Feito com HTML e CSS por Astro ✨</p>
 
   </main>
+
+  <!--
+    🤖 O ROBÔ QUE ATUALIZA SOZINHO (não precisa mexer nem apagar)
+
+    Isto é JavaScript, a terceira linguagem da web: ela dá COMPORTAMENTO
+    para a página. De 10 em 10 segundos, o robô pergunta para o GitHub
+    se o seu site mudou. Se mudou, ele recarrega a página sozinho.
+    Assim, depois do commit, é só esperar: não precisa apertar F5.
+
+    No laboratório o robô fica parado (lá o resultado já muda na hora).
+  -->
+  <script>
+    // Aqui o robô guarda o seu site do jeito que ele está agora.
+    let versaoGuardada = null;
+
+    // A tarefa do robô: buscar o site de novo e comparar.
+    async function conferir() {
+      try {
+        // Pede o site ao GitHub, sem usar a cópia velha do navegador.
+        const resposta = await fetch(location.pathname + '?robo=' + Date.now(), { cache: 'no-store' });
+        const versaoNova = await resposta.text();
+
+        if (versaoGuardada === null) {
+          versaoGuardada = versaoNova;   // primeira vez: só guarda
+        } else if (versaoNova !== versaoGuardada) {
+          location.reload();             // mudou: recarrega a página
+        }
+      } catch (erro) {
+        // Sem internet agora? Tudo bem: tenta de novo daqui a pouco.
+      }
+    }
+
+    // Só liga o robô quando o site está no ar (endereço com http).
+    if (location.protocol.startsWith('http')) {
+      conferir();
+      setInterval(conferir, 10000);    // 10000 milissegundos = 10 segundos
+    }
+  </script>
 </body>
 </html>
